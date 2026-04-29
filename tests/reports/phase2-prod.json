@@ -1,0 +1,12 @@
+{
+  "status": "ERROR",
+  "environment": "production",
+  "baseUrl": "http://localhost:4173",
+  "timestamp": "2026-04-29T04:32:54.547Z",
+  "totalTests": 0,
+  "passed": 0,
+  "failed": 0,
+  "tests": [],
+  "consoleErrors": [],
+  "error": "Failed to launch the browser process! spawn C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe ENOENT\n\n\nTROUBLESHOOTING: https://pptr.dev/troubleshooting\n"
+}

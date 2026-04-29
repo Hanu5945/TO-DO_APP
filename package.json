@@ -1,0 +1,24 @@
+{
+  "name": "vue-app",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "prod": "vite build && vite preview",
+    "test:dev": "node tests/e2e/phase2-verification.js http://localhost:5173",
+    "test:prod": "node tests/e2e/phase2-verification.js http://localhost:4173"
+  },
+  "dependencies": {
+    "pinia": "^2.1.0",
+    "vue": "^3.4.0",
+    "vue-router": "^4.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "puppeteer": "^21.11.0",
+    "vite": "^5.0.0"
+  }
+}
