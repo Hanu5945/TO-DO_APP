@@ -50,6 +50,12 @@
 5. **문서 업데이트**: 변경사항을 문서에 반영하기
 6. **요구되지 않은 부분 추가 금지**: 사용자가 명시하지 않은 기능/파일/색상을 절대 추가하지 않기
 7. **미흡한 부분은 제안만 하기**: 스스로 판단해서 채워넣지 말고, 사용자에게 먼저 제안하기 (예: "이 부분이 필요할 것 같은데 추가할까요?")
+8. **격리 원칙 (Isolation Principle)**: 새로운 기능 추가 시 기존 코드 수정 금지
+   - ✅ 새 컴포넌트는 새 파일 생성
+   - ✅ 새 함수는 새 유틸리티 파일 생성
+   - ✅ 기존 파일 수정은 라우터, store 초기화 등 필수인 경우만
+   - ✅ 기존 CSS/HTML은 절대 수정 금지
+   - ✅ 회귀 테스트로 기존 기능 영향 없음을 확인
 
 ### 4.2 작업 흐름
 ```
@@ -68,6 +74,7 @@
 
 | 상황 | 참고 문서 |
 |-----|---------|
+| **Git 브랜치 관리** ⭐ | `GIT_WORKFLOW.md` |
 | 기능 요구사항 확인 | `docs/PRODUCT_SPEC.md` |
 | Vue 컴포넌트 구현 | `docs/FRONTEND.md` |
 | UI/스타일 작업 | `docs/DESIGN_SYSTEM.md` |
@@ -87,18 +94,19 @@
 단, 아래 규칙은 반드시 따른다.
 
 1. 모든 작업은 `AGENTS.md`와 `docs/README.md`를 먼저 읽는다.
-2. 기능 구현 전에는 `docs/PRODUCT_SPEC.md`와 관련 `docs/features/` 문서를 읽는다.
-3. Vue 코드 수정 전에는 `docs/FRONTEND.md`를 읽는다.
-4. UI 수정 전에는 `docs/DESIGN_SYSTEM.md`를 읽는다.
-5. 폴더 구조나 의존성 변경 전에는 `docs/ARCHITECTURE.md`를 읽는다.
-6. 작업 계획이 필요한 경우 `docs/EXECUTION_PLANS.md`에 기록한다.
-7. ⭐ **각 Phase 구현 후에는 `docs/TEST_PROCEDURES.md` 기준으로 테스트 절차를 정의해야 한다.**
-8. ⭐ **테스트는 자동화 스크립트로 진행한다** (Puppeteer/Playwright 기반)
-9. ⭐ **테스트가 완료되고 사용자 승인 후에만 실제 코드에 적용한다.** (하네스 엔지니어링 원칙 5: 직접 검증)
-10. 완료 전에는 `docs/QUALITY_CHECKLIST.md` 기준으로 검증한다.
-11. 임시 구현이 생기면 `docs/TECH_DEBT.md`에 반드시 기록한다.
-12. 기술 선택이나 구조 변경이 있으면 `docs/decisions/`에 ADR 형태로 기록한다.
-13. 문서 내용과 실제 코드가 다르면, 바로 수정하지 말고 불일치 사실을 먼저 보고한다.
+2. ⭐ **브랜치 작업 전에는 `GIT_WORKFLOW.md`를 읽는다** (feature → develop → main 흐름 준수)
+3. 기능 구현 전에는 `docs/PRODUCT_SPEC.md`와 관련 `docs/features/` 문서를 읽는다.
+4. Vue 코드 수정 전에는 `docs/FRONTEND.md`를 읽는다.
+5. UI 수정 전에는 `docs/DESIGN_SYSTEM.md`를 읽는다.
+6. 폴더 구조나 의존성 변경 전에는 `docs/ARCHITECTURE.md`를 읽는다.
+7. 작업 계획이 필요한 경우 `docs/EXECUTION_PLANS.md`에 기록한다.
+8. ⭐ **각 Phase 구현 후에는 `docs/TEST_PROCEDURES.md` 기준으로 테스트 절차를 정의해야 한다.**
+9. ⭐ **테스트는 자동화 스크립트로 진행한다** (Puppeteer/Playwright 기반)
+10. ⭐ **테스트가 완료되고 사용자 승인 후에만 실제 코드에 적용한다.** (하네스 엔지니어링 원칙 5: 직접 검증)
+11. 완료 전에는 `docs/QUALITY_CHECKLIST.md` 기준으로 검증한다.
+12. 임시 구현이 생기면 `docs/TECH_DEBT.md`에 반드시 기록한다.
+13. 기술 선택이나 구조 변경이 있으면 `docs/decisions/`에 ADR 형태로 기록한다.
+14. 문서 내용과 실제 코드가 다르면, 바로 수정하지 말고 불일치 사실을 먼저 보고한다.
 
 ---
 

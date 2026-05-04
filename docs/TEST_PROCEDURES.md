@@ -9,6 +9,84 @@
 
 ---
 
+## 🧬 Vitest를 사용한 컴포넌트 테스트 (권장)
+
+**브라우저 불필요 → Linux 샌드박스에서 직접 실행 가능**
+
+### 환경 요구사항
+- Node.js 18+
+- npm (기존 설치된 것 사용)
+
+### 테스트 실행
+
+```bash
+npm run test
+```
+
+**결과:**
+- ✅ PASSED: 모든 컴포넌트 테스트 통과
+- ❌ FAILED: 실패 로그 확인 후 코드 수정 → 재테스트 (최대 3회)
+
+---
+
+## 📋 테스트 전략
+
+### 전체 테스트 (Comprehensive Test)
+
+**모든 merge 전에는 전체 테스트를 실행합니다.**
+
+```bash
+# feature 브랜치에서 새로운 Phase 개발 완료 후
+npm run test:dev (또는 npm run test:prod)
+
+# 테스트 범위:
+✅ Phase 2.1 (기존 기능 - NoticeBar + Header)
+✅ Phase 2.3 (기존 기능 - 탭 네비게이션)
+✅ Phase 2.4 (새로운 기능 - Personal Daily View)
+```
+
+**통과 조건:**
+- 모든 Phase가 ✅ 통과
+- 하나라도 ❌ 실패 → merge 금지
+- 사용자 승인 후에만 develop 병합
+
+**회귀 테스트의 이점:**
+- ✅ 새 기능이 기존 기능을 깨뜨리지 않음 확인
+- ✅ 의도하지 않은 버그 조기 발견
+- ✅ 코드의 안정성 보장
+
+---
+
+### 격리 원칙 검증 (Isolation Verification)
+
+**새로운 기능은 기존 코드를 건드리지 않고 추가되어야 합니다.**
+
+| 확인 항목 | 검증 방법 |
+|----------|---------|
+| **새 컴포넌트** | 새로운 .vue 파일인가? (기존 파일 수정 없음) |
+| **기존 CSS 보존** | Header.vue, NoticeBar.vue 스타일 변경 없음? |
+| **기존 HTML 보존** | 기존 컴포넌트 마크업 변경 없음? |
+| **라우터만 변경** | router/index.js에 새로운 라우트만 추가? |
+| **Store 격리** | taskStore.js 신규 생성, authStore 건드리지 않음? |
+| **회귀 테스트 통과** | Phase 2.1, 2.3이 여전히 ✅ 통과? |
+
+**격리 원칙 위반 예시:**
+```javascript
+// ❌ 위반: 기존 Header.vue 수정
+// src/components/common/Header.vue
+<div class="header-new">  <!-- 새로운 클래스 추가 -->
+  <!-- 수정됨 -->
+</div>
+
+// ✅ 올바른 방식: 새 컴포넌트 생성
+// src/components/dashboard/TimeTable.vue (신규 파일)
+<div class="time-table">  <!-- 새로운 파일의 새로운 클래스 -->
+  <!-- 격리됨 -->
+</div>
+```
+
+---
+
 ## ✅ 테스트 계정 (전체 테스트에서 사용)
 
 | 역할 | 이메일 | 비밀번호 |

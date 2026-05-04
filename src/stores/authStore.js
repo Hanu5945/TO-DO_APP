@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 
 export const useAuthStore = defineStore('auth', () => {
   // State
-  const user = ref(null)
+  const user = ref(JSON.parse(localStorage.getItem('user')) || null)
   const token = ref(localStorage.getItem('token') || null)
   const isLoading = ref(false)
   const error = ref(null)
