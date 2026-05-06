@@ -1,0 +1,152 @@
+{
+  "status": "PASSED",
+  "environment": "development",
+  "baseUrl": "http://localhost:5173",
+  "timestamp": "2026-05-06T04:59:27.760Z",
+  "totalTests": 35,
+  "passed": 35,
+  "failed": 0,
+  "tests": [
+    {
+      "name": "WaitingList - 대기 목록 영역 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "WaitingList - \"대기 목록\" 타이틀 표시",
+      "status": "PASSED"
+    },
+    {
+      "name": "WaitingList - Task 카드 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "WaitingList - \"+ Task 추가\" 버튼 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "WaitingList - Task 카드에 담당자 이름 표시",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 시간표 영역 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 날짜 표시 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 이전날 버튼 (◀) 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 시간 레이블 존재 (07:00)",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 시간 레이블 존재 (20:00)",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - Task 블록 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 진행중 Task 파란색 배경",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 완료 Task 초록색 배경",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 지연 Task 빨간색 배경",
+      "status": "PASSED"
+    },
+    {
+      "name": "DateNav - 다음날 버튼 클릭 후 날짜 변경",
+      "status": "PASSED"
+    },
+    {
+      "name": "DateNav - 이전날 버튼 클릭 후 날짜 복구",
+      "status": "PASSED"
+    },
+    {
+      "name": "Modal - Task 카드 클릭시 모달 열림",
+      "status": "PASSED"
+    },
+    {
+      "name": "Modal - \"+ Task 추가\" 버튼 클릭시 등록 모달 열림",
+      "status": "PASSED"
+    },
+    {
+      "name": "Console - 에러 없음",
+      "status": "PASSED"
+    },
+    {
+      "name": "WaitingList - 대기 목록 영역 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "WaitingList - \"대기 목록\" 타이틀 표시",
+      "status": "PASSED"
+    },
+    {
+      "name": "WaitingList - Task 카드 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "WaitingList - \"+ Task 추가\" 버튼 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "WaitingList - Task 카드에 담당자 이름 표시",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 시간표 영역 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 날짜 표시 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 이전날 버튼 (◀) 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 시간 레이블 존재 (07:00)",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 시간 레이블 존재 (20:00)",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - Task 블록 존재",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 진행중 Task 파란색 배경",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 완료 Task 초록색 배경",
+      "status": "PASSED"
+    },
+    {
+      "name": "TimeTable - 지연 Task 빨간색 배경",
+      "status": "PASSED"
+    },
+    {
+      "name": "Admin - TimeTable Task 클릭시 수정 모달 열림",
+      "status": "PASSED"
+    },
+    {
+      "name": "Console - 에러 없음",
+      "status": "PASSED"
+    }
+  ],
+  "consoleErrors": []
+}

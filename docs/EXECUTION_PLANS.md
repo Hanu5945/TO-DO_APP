@@ -390,23 +390,14 @@ npm run test:prod # 운영 환경 테스트
 #### 2.4 Personal Daily View (메인 화면)
 **목표**: 일일 스케줄을 시간표 형식으로 표시
 
-**상태**: ⏳ 개발 대기 중 (Phase 2.1 완료 후 다음 구현 대상)
+**구현 완료** ✅ (2026-05-06)
+- [o] WaitingList.vue (대기 목록) - 150px 고정, 최대 10개 Task
+- [o] TimeTable.vue (시간표) - 07:00~20:00, ◀▶ 날짜 이동
+- [o] TimeSlot.vue (시간 슬롯) - 동시 Task 균등 분할, 지연 사유 툴팁
+- [o] taskStore 기초 설정 (Task 상태 관리, mock 데이터)
+- [o] Task 상태별 색상 적용 (PENDING/IN_PROGRESS/COMPLETED/DELAYED)
 
-**구현 예정 컴포넌트:**
-- [⏳] WaitingList.vue (대기 목록) - 시간 미정 Task 표시
-- [⏳] TimeTable.vue (시간표) - 시간별 Task 시각화
-- [⏳] TimeSlot.vue (시간 슬롯) - 개별 시간대 렌더링
-
-**구현 예정 로직:**
-- [⏳] taskStore 기초 설정 (Task 상태 관리)
-- [⏳] Task 상태별 색상 적용 (PENDING/IN_PROGRESS/COMPLETED/DELAYED)
-
-**산출물**: 
-- 대기 목록 UI (좌측 사이드바)
-- 시간표 레이아웃 (중앙 메인 콘텐츠)
-- Task 상태별 색상 테마
-
-**상세 문서**: `docs/features/PHASE_2.4.md`
+**산출물**: 대기 목록 + 시간표 + Task 상태별 색상
 
 **기획안 기반 준수 사항**:
 - 대기 목록: 너비 150px (고정), 최대 10개 Task
@@ -417,18 +408,18 @@ npm run test:prod # 운영 환경 테스트
 ---
 
 #### 2.5 Task 관리 기본
-- [ ] TaskForm.vue (등록/수정 공용)
-- [ ] TaskCard.vue (Task 카드)
-- [ ] TaskDetail.vue (상세 조회)
-- [ ] taskStore (CRUD 동작)
-- [ ] API 연동 (GET, POST, PUT, DELETE)
+- [o] TaskForm.vue (등록/수정 공용) ✅ 2026-05-06
+- [ ] TaskCard.vue (Task 카드) - WaitingList 내 인라인 처리
+- [o] TaskDetail.vue (상세 조회) ✅ 2026-05-06
+- [o] taskStore (CRUD 동작) ✅ 2026-05-06
+- [ ] API 연동 (GET, POST, PUT, DELETE) - 임시 mock 데이터 사용 중
 
 **산출물**: 완전한 Task CRUD
 
 #### 2.6 상태 관리
-- [ ] taskStore 완성
-- [ ] noticeStore 기초
-- [ ] uiStore (모달, 알림)
+- [o] taskStore 완성 ✅ 2026-05-06
+- [o] noticeStore 기초 ✅ 2026-04-28
+- [o] uiStore (모달, 알림) ✅ 2026-05-06
 
 **산출물**: 전역 상태 관리 구조
 

@@ -1,125 +1,208 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
+const today = new Date()
+const fmt = (d) => d.toISOString().slice(0, 16) // "YYYY-MM-DDTHH:mm"
+
+const pad = (n) => String(n).padStart(2, '0')
+const todayStr = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`
+
+// 임시 테스트 데이터
+const MOCK_TASKS = [
+  {
+    id: '1',
+    title: '기획서 작성 완료',
+    assignees: [{ id: '1', name: '최고관리자' }],
+    startDateTime: `${todayStr}T07:00`,
+    endDateTime: `${todayStr}T08:30`,
+    status: 'COMPLETED',
+    memo: '',
+    delayReason: null,
+    delayRecordedAt: null,
+    createdBy: { id: '1', name: '최고관리자' },
+    updatedBy: { id: '1', name: '최고관리자' },
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: '2',
+    title: '주간 보고서',
+    assignees: [{ id: '2', name: '관리자' }],
+    startDateTime: `${todayStr}T08:00`,
+    endDateTime: `${todayStr}T10:00`,
+    status: 'IN_PROGRESS',
+    memo: 'v2 API 명세 포함 필요',
+    delayReason: null,
+    delayRecordedAt: null,
+    createdBy: { id: '1', name: '최고관리자' },
+    updatedBy: { id: '1', name: '최고관리자' },
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: '3',
+    title: 'API 명세 검토',
+    assignees: [{ id: '2', name: '관리자' }, { id: '3', name: '일반멤버' }],
+    startDateTime: `${todayStr}T08:00`,
+    endDateTime: `${todayStr}T10:00`,
+    status: 'DELAYED',
+    memo: '',
+    delayReason: 'v2 API 스펙 변경으로 인해 전면 재작성 필요',
+    delayRecordedAt: new Date().toISOString(),
+    createdBy: { id: '1', name: '최고관리자' },
+    updatedBy: { id: '2', name: '관리자' },
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: '4',
+    title: '코드 리뷰',
+    assignees: [{ id: '1', name: '최고관리자' }],
+    startDateTime: null,
+    endDateTime: null,
+    status: 'PENDING',
+    memo: '',
+    delayReason: null,
+    delayRecordedAt: null,
+    createdBy: { id: '1', name: '최고관리자' },
+    updatedBy: { id: '1', name: '최고관리자' },
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: '5',
+    title: '보고서 초안',
+    assignees: [{ id: '3', name: '일반멤버' }],
+    startDateTime: null,
+    endDateTime: null,
+    status: 'PENDING',
+    memo: '',
+    delayReason: null,
+    delayRecordedAt: null,
+    createdBy: { id: '3', name: '일반멤버' },
+    updatedBy: { id: '3', name: '일반멤버' },
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: '6',
+    title: 'DB 설계',
+    assignees: [{ id: '1', name: '최고관리자' }],
+    startDateTime: `${todayStr}T10:00`,
+    endDateTime: `${todayStr}T12:00`,
+    status: 'IN_PROGRESS',
+    memo: '',
+    delayReason: null,
+    delayRecordedAt: null,
+    createdBy: { id: '1', name: '최고관리자' },
+    updatedBy: { id: '1', name: '최고관리자' },
+    createdAt: new Date().toISOString()
+  }
+]
+
 export const useTaskStore = defineStore('task', () => {
-  // State
-  const tasks = ref([
-    {
-      id: 'task-001',
-      title: '보고서 초안 작성',
-      description: '프로젝트 X 분기 보고서',
-      status: 'IN_PROGRESS',
-      assignees: ['kim123'],
-      startDate: '2026-04-29',
-      startTime: '09:00',
-      endDate: '2026-04-29',
-      endTime: '11:00',
-      priority: 'HIGH',
-      delayReason: null,
-      memo: null,
-      createdAt: '2026-04-25T10:30:00Z',
-      updatedAt: '2026-04-29T09:00:00Z'
-    },
-    {
-      id: 'task-002',
-      title: '코드 리뷰',
-      description: 'PR #123 검토',
-      status: 'PENDING',
-      assignees: ['lee456'],
-      startDate: '2026-04-29',
-      startTime: null,
-      endDate: '2026-04-29',
-      endTime: null,
-      priority: 'MEDIUM',
-      delayReason: null,
-      memo: null,
-      createdAt: '2026-04-26T14:20:00Z',
-      updatedAt: '2026-04-26T14:20:00Z'
-    },
-    {
-      id: 'task-003',
-      title: '주간 보고서',
-      description: '팀 성과 정리',
-      status: 'COMPLETED',
-      assignees: ['park789'],
-      startDate: '2026-04-28',
-      startTime: '14:00',
-      endDate: '2026-04-28',
-      endTime: '15:30',
-      priority: 'MEDIUM',
-      delayReason: null,
-      memo: null,
-      createdAt: '2026-04-27T10:00:00Z',
-      updatedAt: '2026-04-28T15:30:00Z'
-    }
-  ])
+  const tasks = ref([...MOCK_TASKS])
+  const isLoading = ref(false)
+  const error = ref(null)
+  const currentDate = ref(todayStr)
 
-  // Getters
-  const getTodayTasks = computed(() => {
-    const today = new Date().toISOString().split('T')[0]
-    return tasks.value.filter(task => task.startDate === today)
-  })
+  // 대기 목록: 시간 미지정 Task
+  const waitingTasks = computed(() =>
+    tasks.value.filter((t) => !t.startDateTime)
+  )
 
-  const getWaitingTasks = computed(() => {
-    return tasks.value.filter(task => !task.startTime && task.status !== 'COMPLETED')
-  })
-
-  const getScheduledTasks = computed(() => {
-    return tasks.value.filter(task => task.startTime)
-  })
-
-  const getTasksByStatus = (status) => {
-    return tasks.value.filter(task => task.status === status)
-  }
-
-  const getTasksByDate = (date) => {
-    return tasks.value.filter(task => task.startDate === date)
-  }
-
-  // Actions
-  const addTask = (task) => {
-    tasks.value.push({
-      ...task,
-      id: `task-${Date.now()}`,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+  // 특정 날짜의 시간표 Task
+  const tasksByDate = computed(() => {
+    return tasks.value.filter((t) => {
+      if (!t.startDateTime) return false
+      return t.startDateTime.startsWith(currentDate.value)
     })
-  }
+  })
 
-  const updateTask = (id, updates) => {
-    const index = tasks.value.findIndex(t => t.id === id)
-    if (index !== -1) {
-      tasks.value[index] = {
-        ...tasks.value[index],
-        ...updates,
-        updatedAt: new Date().toISOString()
-      }
+  const fetchTasks = async (date) => {
+    if (date) currentDate.value = date
+    isLoading.value = true
+    error.value = null
+    try {
+      await new Promise((r) => setTimeout(r, 100))
+    } catch (err) {
+      error.value = err.message
+    } finally {
+      isLoading.value = false
     }
   }
 
-  const deleteTask = (id) => {
-    tasks.value = tasks.value.filter(t => t.id !== id)
+  const createTask = async (taskData) => {
+    isLoading.value = true
+    error.value = null
+    try {
+      const newTask = {
+        id: String(Date.now()),
+        ...taskData,
+        status: taskData.startDateTime ? 'PENDING' : 'PENDING',
+        delayReason: null,
+        delayRecordedAt: null,
+        createdAt: new Date().toISOString()
+      }
+      tasks.value.push(newTask)
+      return newTask
+    } catch (err) {
+      error.value = err.message
+    } finally {
+      isLoading.value = false
+    }
   }
 
-  const updateTaskStatus = (id, status) => {
-    updateTask(id, { status })
+  const updateTask = async (id, taskData) => {
+    isLoading.value = true
+    error.value = null
+    try {
+      const idx = tasks.value.findIndex((t) => t.id === id)
+      if (idx !== -1) {
+        tasks.value[idx] = { ...tasks.value[idx], ...taskData }
+      }
+      return tasks.value[idx]
+    } catch (err) {
+      error.value = err.message
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  const deleteTask = async (id) => {
+    isLoading.value = true
+    error.value = null
+    try {
+      tasks.value = tasks.value.filter((t) => t.id !== id)
+    } catch (err) {
+      error.value = err.message
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  const recordDelay = async (id, reason) => {
+    const idx = tasks.value.findIndex((t) => t.id === id)
+    if (idx !== -1) {
+      tasks.value[idx].status = 'DELAYED'
+      tasks.value[idx].delayReason = reason
+      tasks.value[idx].delayRecordedAt = new Date().toISOString()
+    }
+  }
+
+  const changeDate = (offset) => {
+    const d = new Date(currentDate.value)
+    d.setDate(d.getDate() + offset)
+    currentDate.value = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`
   }
 
   return {
-    // State
     tasks,
-
-    // Getters
-    getTodayTasks,
-    getWaitingTasks,
-    getScheduledTasks,
-    getTasksByStatus,
-    getTasksByDate,
-
-    // Actions
-    addTask,
+    isLoading,
+    error,
+    currentDate,
+    waitingTasks,
+    tasksByDate,
+    fetchTasks,
+    createTask,
     updateTask,
     deleteTask,
-    updateTaskStatus
+    recordDelay,
+    changeDate
   }
 })
