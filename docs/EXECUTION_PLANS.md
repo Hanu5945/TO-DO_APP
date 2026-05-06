@@ -240,9 +240,9 @@ npm run dev
 - [o] TeamView.vue (임시 팀뷰 페이지) ✅ 2026-04-28
 - [o] CalendarView.vue (임시 달력뷰 페이지) ✅ 2026-04-28
 - [o] 라우터 설정 (team, calendar 라우트 추가) ✅ 2026-04-28
-- [ ] WaitingList.vue (대기 목록)
-- [ ] TimeTable.vue (시간표)
-- [ ] TimeSlot.vue (시간 슬롯)
+- [o] WaitingList.vue (대기 목록) ✅ 2026-05-06
+- [o] TimeTable.vue (시간표) ✅ 2026-05-06
+- [o] TimeSlot.vue (시간 슬롯) ✅ 2026-05-06
 
 **산출물**: 공지 배너 + 헤더가 포함된 메인 화면, 탭 네비게이션 정상 작동
 
@@ -292,18 +292,18 @@ npm run dev 후:
 ```
 
 #### 2.2 Task 관리 기본
-- [ ] TaskForm.vue (등록/수정 공용)
-- [ ] TaskCard.vue (Task 카드)
-- [ ] TaskDetail.vue (상세 조회)
-- [ ] taskStore (CRUD 동작)
-- [ ] API 연동 (GET, POST, PUT, DELETE)
+- [o] TaskForm.vue (등록/수정 공용) ✅ 2026-05-06
+- [ ] TaskCard.vue (Task 카드) - WaitingList 내 인라인 처리
+- [o] TaskDetail.vue (상세 조회) ✅ 2026-05-06
+- [o] taskStore (CRUD 동작) ✅ 2026-05-06
+- [ ] API 연동 (GET, POST, PUT, DELETE) - 임시 mock 데이터 사용 중
 
 **산출물**: 완전한 Task CRUD
 
 #### 2.3 상태 관리
-- [ ] taskStore 완성
-- [ ] noticeStore 기초
-- [ ] uiStore (모달, 알림)
+- [o] taskStore 완성 ✅ 2026-05-06
+- [o] noticeStore 기초 ✅ 2026-04-28
+- [o] uiStore (모달, 알림) ✅ 2026-05-06
 
 **산출물**: 전역 상태 관리 구조
 

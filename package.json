@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "prod": "vite build && vite preview",
     "test:dev": "node tests/e2e/phase2-verification.js http://localhost:5173",
-    "test:prod": "node tests/e2e/phase2-verification.js http://localhost:4173"
+    "test:prod": "node tests/e2e/phase2-verification.js http://localhost:4173",
+    "test:timetable:dev": "node tests/e2e/phase2-timetable-verification.js http://localhost:5173",
+    "test:timetable:prod": "node tests/e2e/phase2-timetable-verification.js http://localhost:4173"
   },
   "dependencies": {
     "pinia": "^2.1.0",
